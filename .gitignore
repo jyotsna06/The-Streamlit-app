@@ -1,3 +1,6 @@
+# Local docs (not for repo)
+WRITEUP.md
+
 # Environment
 .env
 venv/
