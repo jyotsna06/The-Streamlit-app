@@ -1,6 +1,4 @@
-"""Shared UI styles and chart theming."""
-
-import plotly.graph_objects as go
+"""Shared UI styles and HTML components."""
 
 COMPANY_COLORS = {"NVDA": "#76b900", "AMD": "#ed1c24", "INTC": "#0071c5"}
 COMPANY_GRADIENTS = {
@@ -188,71 +186,6 @@ a:hover { color: #a5b4fc; }
 """
 
 
-def apply_chart_theme(fig, title=None, height=420):
-    fig.update_layout(**CHART_LAYOUT, height=height)
-    if title:
-        fig.update_layout(
-            title=dict(text=title, font=dict(size=15, color="#e2e8f0"), x=0.02, xanchor="left"),
-        )
-    fig.update_xaxes(**AXIS_STYLE)
-    fig.update_yaxes(**AXIS_STYLE)
-    return fig
-
-
-def build_grouped_bar(df, x, y, color, y_title, title=None, height=420):
-    fig = go.Figure()
-    for ticker in sorted(df[color].unique()):
-        sub = df[df[color] == ticker]
-        c = COMPANY_COLORS.get(ticker, "#6366f1")
-        fig.add_trace(go.Bar(
-            x=sub[x], y=sub[y], name=COMPANY_NAMES.get(ticker, ticker),
-            marker=dict(color=c, line=dict(width=0),
-                        pattern_shape="/" if ticker == "INTC" else ""),
-            hovertemplate=f"<b>{COMPANY_NAMES.get(ticker, ticker)}</b><br>"
-                          f"%{{x}}<br>{y_title}: %{{y:,.1f}}<extra></extra>",
-        ))
-    fig.update_layout(barmode="group", bargap=0.18, bargroupgap=0.08)
-    return apply_chart_theme(fig, title=title, height=height)
-
-
-def build_smooth_line(df, x, y, color, y_title, title=None, height=420, facet=None):
-    fig = go.Figure()
-    for ticker in sorted(df[color].unique()):
-        sub = df[df[color] == ticker].sort_values(x)
-        c = COMPANY_COLORS.get(ticker, "#6366f1")
-        fig.add_trace(go.Scatter(
-            x=sub[x], y=sub[y], name=COMPANY_NAMES.get(ticker, ticker), mode="lines+markers",
-            line=dict(color=c, width=2.5, shape="spline"),
-            marker=dict(size=7, color=c, line=dict(width=2, color="#0f172a")),
-            fill="tozeroy", fillcolor=COMPANY_GRADIENTS.get(ticker, ("rgba(99,102,241,0.5)", "rgba(99,102,241,0.05)"))[1],
-            hovertemplate=f"<b>{COMPANY_NAMES.get(ticker, ticker)}</b><br>"
-                          f"%{{x}}<br>{y_title}: %{{y:,.2f}}<extra></extra>",
-        ))
-    return apply_chart_theme(fig, title=title, height=height)
-
-
-def build_margin_facets(df, x, y, color, facet, y_title, title=None, height=380):
-    import plotly.express as px
-    fig = px.line(df, x=x, y=y, color=color, facet_col=facet, markers=True,
-                  color_discrete_map=COMPANY_COLORS,
-                  labels={y: y_title, x: "Period", color: "Company"})
-    fig.for_each_annotation(lambda a: a.update(text=a.text.split("=")[-1].replace("_", " ").title()))
-    fig.update_traces(line=dict(width=2.5), marker=dict(size=6))
-    return apply_chart_theme(fig, title=title, height=height)
-
-
-def build_donut(labels, values, title=None, height=340):
-    colors = [COMPANY_COLORS.get(l, "#6366f1") for l in labels]
-    fig = go.Figure(go.Pie(
-        labels=[COMPANY_NAMES.get(l, l) for l in labels], values=values,
-        hole=0.62, marker=dict(colors=colors, line=dict(color="#0f172a", width=2)),
-        textinfo="label+percent", textfont=dict(size=12, color="#e2e8f0"),
-        hovertemplate="<b>%{label}</b><br>$%{value:,.0f}M<br>%{percent}<extra></extra>",
-    ))
-    fig.update_layout(showlegend=False)
-    return apply_chart_theme(fig, title=title, height=height)
-
-
 def kpi_card(label, value, sub=""):
     sub_html = f'<div class="kpi-sub">{sub}</div>' if sub else ""
     return f"""<div class="kpi-card"><div class="kpi-label">{label}</div>
@@ -274,3 +207,13 @@ def status_pill(ok, ok_text, warn_text):
     cls = "status-ok" if ok else "status-warn"
     text = ok_text if ok else warn_text
     return f'<span class="status-pill {cls}">{"●" if ok else "○"} {text}</span>'
+
+
+# Re-export chart builders (backward compat for cached app.py)
+from ui.charts import (  # noqa: E402
+    apply_chart_theme,
+    build_donut,
+    build_grouped_bar,
+    build_margin_facets,
+    build_smooth_line,
+)

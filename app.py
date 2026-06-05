@@ -8,23 +8,21 @@ import sys
 import json
 from pathlib import Path
 
+ROOT = Path(__file__).parent
+sys.path.insert(0, str(ROOT))
+
 import streamlit as st
 import pandas as pd
 from dotenv import load_dotenv
 
-from ui.styles import (
-    CUSTOM_CSS, COMPANY_COLORS, COMPANY_NAMES,
-    apply_chart_theme, kpi_card, company_card, status_pill,
-    build_grouped_bar, build_smooth_line, build_margin_facets, build_donut,
-)
+from ui.styles import CUSTOM_CSS, COMPANY_COLORS, COMPANY_NAMES, kpi_card, company_card, status_pill
+from ui.charts import build_grouped_bar, build_smooth_line, build_margin_facets, build_donut
 from ui.verification import (
     get_health_summary, get_filing_inventory, get_ticker_completeness,
     get_spot_check, compute_health_score, FINANCIAL_FIELDS,
 )
 
-load_dotenv(Path(__file__).parent / ".env")
-ROOT = Path(__file__).parent
-sys.path.insert(0, str(ROOT))
+load_dotenv(ROOT / ".env")
 
 st.set_page_config(
     page_title="FinAnalyst AI",
@@ -536,10 +534,9 @@ with tabs[5]:
             with st.expander("Answerable questions detail"):
                 adf = pd.DataFrame(res.get("answerable", []))
                 if not adf.empty:
-                    st.dataframe(
-                        adf[["id", "question", "correctness", "citation_ok", "num_citations"]],
-                        use_container_width=True, hide_index=True,
-                    )
+                    show = [c for c in ["id", "question", "correctness", "citation_ok", "answer"]
+                            if c in adf.columns]
+                    st.dataframe(adf[show], use_container_width=True, hide_index=True)
 
             with st.expander("Unanswerable questions detail"):
                 udf = pd.DataFrame(res.get("unanswerable", []))
