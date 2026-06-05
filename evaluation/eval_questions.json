@@ -1,0 +1,134 @@
+{
+  "answerable": [
+    {
+      "id": "Q01",
+      "question": "What was NVIDIA's total revenue for fiscal year 2024?",
+      "expected_contains": ["NVIDIA", "revenue", "2024"],
+      "expected_source_ticker": "NVDA",
+      "expected_form": "10-K"
+    },
+    {
+      "id": "Q02",
+      "question": "What was AMD's net income in 2023?",
+      "expected_contains": ["AMD", "net income", "2023"],
+      "expected_source_ticker": "AMD",
+      "expected_form": "10-K"
+    },
+    {
+      "id": "Q03",
+      "question": "What were Intel's total assets as of their 2023 annual filing?",
+      "expected_contains": ["Intel", "total assets"],
+      "expected_source_ticker": "INTC",
+      "expected_form": "10-K"
+    },
+    {
+      "id": "Q04",
+      "question": "What risk factors did NVIDIA mention related to data center demand?",
+      "expected_contains": ["data center", "risk"],
+      "expected_source_ticker": "NVDA",
+      "expected_form": "10-K"
+    },
+    {
+      "id": "Q05",
+      "question": "How did AMD describe its competitive position in its most recent 10-K?",
+      "expected_contains": ["competitive"],
+      "expected_source_ticker": "AMD",
+      "expected_form": "10-K"
+    },
+    {
+      "id": "Q06",
+      "question": "What was Intel's gross profit in 2022?",
+      "expected_contains": ["Intel", "gross"],
+      "expected_source_ticker": "INTC",
+      "expected_form": "10-K"
+    },
+    {
+      "id": "Q07",
+      "question": "What capital expenditures did NVIDIA report in fiscal year 2024?",
+      "expected_contains": ["NVIDIA", "capital"],
+      "expected_source_ticker": "NVDA",
+      "expected_form": "10-K"
+    },
+    {
+      "id": "Q08",
+      "question": "What did AMD say about AI chip demand in their MD&A?",
+      "expected_contains": ["AMD", "AI"],
+      "expected_source_ticker": "AMD",
+      "expected_form": "10-K"
+    },
+    {
+      "id": "Q09",
+      "question": "What was Intel's operating income in the first half of 2024?",
+      "expected_contains": ["Intel", "operating"],
+      "expected_source_ticker": "INTC",
+      "expected_form": "10-Q"
+    },
+    {
+      "id": "Q10",
+      "question": "What segments does NVIDIA report revenue by in its annual filing?",
+      "expected_contains": ["NVIDIA", "segment"],
+      "expected_source_ticker": "NVDA",
+      "expected_form": "10-K"
+    },
+    {
+      "id": "Q11",
+      "question": "What was AMD's gross profit in 2024?",
+      "expected_contains": ["AMD", "gross profit"],
+      "expected_source_ticker": "AMD",
+      "expected_form": "10-K"
+    },
+    {
+      "id": "Q12",
+      "question": "How much cash did Intel generate from operations in 2023?",
+      "expected_contains": ["Intel", "operating activities"],
+      "expected_source_ticker": "INTC",
+      "expected_form": "10-K"
+    },
+    {
+      "id": "Q13",
+      "question": "What was NVIDIA's total stockholders equity as of their 2024 annual filing?",
+      "expected_contains": ["NVIDIA", "equity"],
+      "expected_source_ticker": "NVDA",
+      "expected_form": "10-K"
+    },
+    {
+      "id": "Q14",
+      "question": "What geographic regions does Intel break out revenue by?",
+      "expected_contains": ["Intel", "geographic"],
+      "expected_source_ticker": "INTC",
+      "expected_form": "10-K"
+    }
+  ],
+  "unanswerable": [
+    {
+      "id": "Q15",
+      "question": "What was NVIDIA's stock price on March 15, 2024?",
+      "reason": "Stock prices are not included in SEC 10-K or 10-Q filings"
+    },
+    {
+      "id": "Q16",
+      "question": "What will AMD's revenue be in fiscal year 2027?",
+      "reason": "Future projections not present in historical filings"
+    },
+    {
+      "id": "Q17",
+      "question": "What is Intel's CEO's personal net worth?",
+      "reason": "Personal financial data is not disclosed in SEC filings"
+    },
+    {
+      "id": "Q18",
+      "question": "What did NVIDIA's CFO say at the Q3 2024 earnings call?",
+      "reason": "Earnings call transcripts are not part of this corpus"
+    },
+    {
+      "id": "Q19",
+      "question": "How many employees does AMD have specifically in their Austin office?",
+      "reason": "Office-level headcount breakdown not in SEC filings"
+    },
+    {
+      "id": "Q20",
+      "question": "What was the exact minute NVIDIA filed their 10-K with the SEC?",
+      "reason": "Sub-day filing timestamps are not contained in the document text"
+    }
+  ]
+}

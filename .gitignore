@@ -1,0 +1,30 @@
+# Environment
+.env
+venv/
+.venv/
+
+# Generated data
+data/filings/*.html
+data/filings/metadata.json
+data/parsed/*.json
+vector_store/*
+!vector_store/.gitkeep
+
+# Evaluation output
+evaluation/eval_results.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# IDE / OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Streamlit
+.streamlit/secrets.toml
