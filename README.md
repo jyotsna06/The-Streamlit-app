@@ -151,9 +151,3 @@ ui/                 # Styles, charts, data verification helpers
 data/               # Downloaded filings + parsed JSON (gitignored)
 vector_store/       # FAISS index (gitignored)
 ```
-
----
-
-## License & Disclaimer
-
-This tool is for educational and exploratory analysis. Always verify key figures against the original SEC filings before making decisions. Flagged conflicts in the dashboard are heuristics, not proof of data errors.
